@@ -24,7 +24,7 @@ Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin'],function (){
 
 });
 
-Route::group(['namespace'=>'Dashboard'],function (){
+Route::group(['namespace'=>'Dashboard','middleware'=>'guest:admin'],function (){
 
     Route::get('/login',[LoginController::class,'login'])->name('admin.login');
     Route::post('/login',[LoginController::class,'postLogin'])->name('admin.post.login');
