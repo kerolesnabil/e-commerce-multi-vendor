@@ -16,15 +16,24 @@ use App\Http\Controllers\Dashboard\LoginController;
 
 Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin'],function (){
 
-    Route::get('/',function (){
+    Route::get('/dsshaaard',function (){
         return 'in admin';
     });
+
+    Route::get('/dsshaaard22',function (){
+        return 'in admin';
+    });
+
+
 
 
 });
 
 Route::group(['namespace'=>'Dashboard'],function (){
 
+    Route::get('/aaaaa',function(){
+        dd("dsaa");
+    });
     Route::get('/login',[LoginController::class,'login'])->name('admin.login');
 
 });
