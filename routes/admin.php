@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\LoginController;
+use App\Http\Controllers\Dashboard\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,31 +11,23 @@ use App\Http\Controllers\Dashboard\LoginController;
 |
 | Here is where you can register web routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| contains the "Admin" middleware group. Now create something great!
 |
 */
 
+// prefix is admin in RouteServiceProvider
+
 Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin'],function (){
 
-    Route::get('/dsshaaard',function (){
-        return 'in admin';
-    });
-
-    Route::get('/dsshaaard22',function (){
-        return 'in admin';
-    });
-
-
+    Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
 
 
 });
 
 Route::group(['namespace'=>'Dashboard'],function (){
 
-    Route::get('/aaaaa',function(){
-        dd("dsaa");
-    });
     Route::get('/login',[LoginController::class,'login'])->name('admin.login');
+    Route::post('/login',[LoginController::class,'postLogin'])->name('admin.post.login');
 
 });
 
