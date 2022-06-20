@@ -45,7 +45,6 @@
                                               enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
-
                                             <input type="hidden" name="id" value="{{$shippingMethods -> id}}">
                                             <div class="form-body">
                                                 <div class="row">
@@ -61,14 +60,8 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
                                                 </div>
-
-
                                             </div>
-
-
-                                            <div id="map" style="height: 500px;width: 1000px;"></div>
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
