@@ -100,17 +100,17 @@
 
 
             <li class=" nav-item"><a href="#"><i class="la la-television"></i><span class="menu-title"
-                                                                                    data-i18n="nav.templates.main">الاعدادات</span></a>
+                                                                                    data-i18n="nav.templates.main">{{__('admin/sidebar.settings')}}</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main"> وسائل التوصيل</a>
+                    <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main">{{__('admin/sidebar.shipping methods')}}</a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="{{route('edit.shipping.methods','free')}}"
-                                   data-i18n="nav.templates.vert.classic_menu">توصيل مجانى </a>
+                                   data-i18n="nav.templates.vert.classic_menu">{{__('admin/sidebar.free shipping')}}</a>
                             </li>
-                            <li><a class="menu-item" href="{{route('edit.shipping.methods','inner')}}">توصيل داخلى </a>
+                            <li><a class="menu-item" href="{{route('edit.shipping.methods','inner')}}">{{__('admin/sidebar.local shipping')}} </a>
                             </li>
                             <li><a class="menu-item" href="{{route('edit.shipping.methods','outer')}}"
-                                   data-i18n="nav.templates.vert.compact_menu">توصيل خارجى</a>
+                                   data-i18n="nav.templates.vert.compact_menu">{{__('admin/sidebar.outer shipping')}}</a>
                             </li>
                         </ul>
                     </li>
