@@ -18,22 +18,33 @@ use App\Http\Controllers\Dashboard\DashboardController;
 
 // prefix is admin in RouteServiceProvider
 
-Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin'],function (){
+Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){
 
-    Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
+    Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin','prefix'=>'admin'],function (){
 
-    Route::group(['prefix'=>'setting'],function (){
-        Route::get('shipping-methods/{type}',[SettingController::class,'editShippingMethods'])->name('edit.shipping.methods');
-        Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shipping.methods');
+        Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
+
+        Route::group(['prefix'=>'setting'],function (){
+            Route::get('shipping-methods/{type}',[SettingController::class,'editShippingMethods'])->name('edit.shipping.methods');
+            Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shipping.methods');
+        });
+
+
     });
 
+    Route::group(['namespace'=>'Dashboard','middleware'=>'guest:admin','prefix'=>'admin'],function (){
+
+        Route::get('/login',[LoginController::class,'login'])->name('admin.login');
+        Route::post('/login',[LoginController::class,'postLogin'])->name('admin.post.login');
+
+    });
 
 });
 
-Route::group(['namespace'=>'Dashboard','middleware'=>'guest:admin'],function (){
 
-    Route::get('/login',[LoginController::class,'login'])->name('admin.login');
-    Route::post('/login',[LoginController::class,'postLogin'])->name('admin.post.login');
 
-});
 
