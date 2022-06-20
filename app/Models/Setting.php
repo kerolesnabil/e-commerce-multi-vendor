@@ -7,68 +7,85 @@ use Illuminate\Database\Eloquent\Model;
 
 class Setting extends Model
 {
+
     use Translatable;
 
     /**
-     * the relation to eager load on every query
+     * The relations to eager load on every query.
      *
      * @var array
      */
-    protected $with=['translation'];
+    protected $with = ['translations'];
 
-    protected $translatedAttributes=['value'];
+
+    protected $translatedAttributes = ['value'];
 
     /**
-     * the attributes that are mass assignable
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable=['key','is_translatable','plain_value'];
+    protected $fillable = ['key', 'is_translatable', 'plain_value'];
 
     /**
-     * the attributes that are cast to native types
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-
-    protected $casts=[
-      'is_translatable'=>'boolean',
+    protected $casts = [
+        'is_translatable' => 'boolean',
     ];
 
-    public static function setMany($settings)
-    {
-        foreach ($settings as $key=>$value){
-            self::set($key,$value);
-        }
-    }
 
     /**
-     * @param string $key
-     * @param mixed  $value
-     * @return void
-     */
-    public static function set($key,$value)
-    {
-        if($key==='translatable'){
-            return static::setTranslatableSettings($value);
-        }
-        if(is_array($value)){
-            $value=json_encode($value);
-        }
-        static::updateOrCreate(['key'=>$key],['plain_value'=>$value]);
-    }
-
-    /**
+     * Set the given settings.
+     *
      * @param array $settings
      * @return void
      */
-    public static function setTranslatableSettings($settings=[])
+    public static function setMany($settings)
     {
-        foreach ($settings as $key=>$value)
+        foreach ($settings as $key => $value) {
+            self::set($key, $value);
+        }
+    }
+
+
+    /**
+     * Set the given setting.
+     *
+     * @param string $key
+     * @param mixed $value
+     * @return void
+     */
+    //  defaultlocal , en
+    public static function set($key, $value)
+    {
+        if ($key === 'translatable') {
+            return static::setTranslatableSettings($value);
+        }
+
+        if(is_array($value))
         {
-            static::updateOrCreate(['key'=>$key],[
-               'is_translatable'=>true,
-               'value'=>$value
+            $value = json_encode($value);
+        }
+
+        static::updateOrCreate(['key' => $key], ['plain_value' => $value]);
+    }
+
+
+    /**
+     * Set a translatable settings.
+     *
+     * @param array $settings
+     * @return void
+     */
+    public static function setTranslatableSettings($settings = [])
+    {
+        foreach ($settings as $key => $value) {
+            static::updateOrCreate(['key' => $key], [
+                'is_translatable' => true,
+                'value' => $value,
             ]);
         }
     }
