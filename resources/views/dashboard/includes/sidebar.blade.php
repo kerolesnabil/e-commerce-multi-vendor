@@ -104,12 +104,12 @@
                 <ul class="menu-content">
                     <li><a class="menu-item" href="#" data-i18n="nav.templates.vert.main"> وسائل التوصيل</a>
                         <ul class="menu-content">
-                            <li><a class="menu-item" href="../vertical-menu-template"
+                            <li><a class="menu-item" href="{{route('edit.shipping.methods','free')}}"
                                    data-i18n="nav.templates.vert.classic_menu">توصيل مجانى </a>
                             </li>
-                            <li><a class="menu-item" href="../vertical-modern-menu-template">توصيل داخلى </a>
+                            <li><a class="menu-item" href="{{route('edit.shipping.methods','inner')}}">توصيل داخلى </a>
                             </li>
-                            <li><a class="menu-item" href="../vertical-compact-menu-template"
+                            <li><a class="menu-item" href="{{route('edit.shipping.methods','outer')}}"
                                    data-i18n="nav.templates.vert.compact_menu">توصيل خارجى</a>
                             </li>
                         </ul>

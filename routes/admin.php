@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\LoginController;
+use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\DashboardController;
 
 /*
@@ -20,6 +21,11 @@ use App\Http\Controllers\Dashboard\DashboardController;
 Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin'],function (){
 
     Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
+
+    Route::group(['prefix'=>'setting'],function (){
+        Route::get('shipping-methods/{type}',[SettingController::class,'editShippingMethods'])->name('edit.shipping.methods');
+        Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shipping.methods');
+    });
 
 
 });
