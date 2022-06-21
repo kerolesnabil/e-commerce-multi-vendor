@@ -7,6 +7,8 @@ return [
     'cancel' => 'تراجع',
     'save' => 'حفظ',
     'status' => 'حالة',
+    'welcome' => 'مرجبا',
+    'logout' => 'تسجيل الخروج',
 
 
 ];

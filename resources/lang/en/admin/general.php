@@ -7,5 +7,7 @@ return [
     'cancel' => 'Cancel',
     'save' => 'Save',
     'status' => 'Status',
+    'welcome' => 'welcome',
+    'logout' => 'logout',
 
 ];

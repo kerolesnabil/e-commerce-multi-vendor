@@ -17,7 +17,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if (!$request->expectsJson()) {
-            if ($request->is('admin/*')){
+            if ($request->is(app()->getLocale().'/admin*')){
                 return route('admin.login');
             }
             else{
