@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\SettingController;
+use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
 
 /*
@@ -27,14 +28,17 @@ Route::group(
     Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin','prefix'=>'admin'],function (){
 
         Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
+        Route::get('logout',[LoginController::class,'logout'])->name('admin.logout');
 
         Route::group(['prefix'=>'setting'],function (){
             Route::get('shipping-methods/{type}',[SettingController::class,'editShippingMethods'])->name('edit.shipping.methods');
             Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shipping.methods');
-            Route::get('logout',[LoginController::class,'logout'])->name('admin.logout');
-
         });
 
+        Route::group(['prefix'=>'profile'],function (){
+            Route::get('edit',[ProfileController::class,'editProfile'])->name('edit.profile');
+            Route::put('update',[ProfileController::class,'updateProfile'])->name('update.profile');
+        });
 
     });
 

@@ -52,10 +52,10 @@ class SettingController extends Controller
 
             DB::commit();
 
-            return redirect()->back()->with(['success'=>'update successfully']);
+            return redirect()->back()->with(['success'=>__('admin/general.updated successfully')]);
 
         }catch (\Exception $e){
-            return redirect()->back()->with(['error'=>'update error']);
+            return redirect()->back()->with(['error'=> __('admin/general.error to update')]);
             DB::rollBack();
         }
 
