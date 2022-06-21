@@ -9,5 +9,6 @@ return [
     'status' => 'Status',
     'welcome' => 'welcome',
     'logout' => 'logout',
+    'language' => 'lang',
 
 ];

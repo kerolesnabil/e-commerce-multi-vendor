@@ -9,6 +9,7 @@ return [
     'status' => 'حالة',
     'welcome' => 'مرجبا',
     'logout' => 'تسجيل الخروج',
+    'language' => 'اللغات',
 
 
 ];
