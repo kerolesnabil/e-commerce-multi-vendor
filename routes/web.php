@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/testLayout', function () {
-    return view('layouts.admin');
+Route::get('/test', function () {
+        $s=\App\Models\Category::find(3);
+        $s->makeVisible(['translations']);
+        return $s;
+
 });

@@ -5,6 +5,7 @@ use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\MainCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::group(
     Route::group(['namespace'=>'Dashboard', 'middleware'=>'auth:admin','prefix'=>'admin'],function (){
 
         Route::get('/',[DashboardController::class,'index'])->name('admin.dashboard');
+
         Route::get('logout',[LoginController::class,'logout'])->name('admin.logout');
 
         Route::group(['prefix'=>'setting'],function (){
@@ -35,10 +37,24 @@ Route::group(
             Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shipping.methods');
         });
 
+        ####################### profile routes #######################
         Route::group(['prefix'=>'profile'],function (){
             Route::get('edit',[ProfileController::class,'editProfile'])->name('edit.profile');
             Route::put('update',[ProfileController::class,'updateProfile'])->name('update.profile');
         });
+        ###################### end profile #######################
+
+        ################################## categories routes ######################################
+        Route::group(['prefix' => 'main_categories'], function () {
+            Route::get('/', [MainCategoriesController::class,'index'])->name('admin.maincategories');
+            Route::get('create', [MainCategoriesController::class,'create'])->name('admin.maincategories.create');
+            Route::post('store', [MainCategoriesController::class,'store'])->name('admin.maincategories.store');
+            Route::get('edit/{id}', [MainCategoriesController::class,'edit'])->name('admin.maincategories.edit');
+            Route::post('update/{id}', [MainCategoriesController::class,'update'])->name('admin.maincategories.update');
+            Route::get('delete/{id}', [MainCategoriesController::class,'destroy'])->name('admin.maincategories.delete');
+        });
+        ################################## end categories    #######################################
+
 
     });
 
