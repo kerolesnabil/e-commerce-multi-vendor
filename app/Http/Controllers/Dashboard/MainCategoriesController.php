@@ -22,12 +22,10 @@ class MainCategoriesController extends Controller
         $categories =   Category::select('id','parent_id')->get();
         return view('dashboard.categories.create',compact('categories'));
     }
+
     public function store(MainCategoryRequest $request)
     {
-
-        DB::beginTransaction();
             //validation
-
             if ($request->has('is_active')) {$request->request->add(['is_active' => 1]);}
             else{$request->request->add(['is_active' => 0]);}
 
@@ -35,7 +33,7 @@ class MainCategoriesController extends Controller
 
             $category = Category::create([
                 'slug'=>$request->slug,
-                'parent_id'=>$request->parent_id,
+                'parent_id'=>0,
                 'is_active'=>$request->is_active
             ]);
 
@@ -44,9 +42,8 @@ class MainCategoriesController extends Controller
             $category->save();
 
             return redirect()->route('admin.maincategories')->with(['success' => 'تم ألاضافة بنجاح']);
-        DB::commit();
-    }
 
+    }
 
     public function edit($id)
     {
@@ -64,14 +61,12 @@ class MainCategoriesController extends Controller
 
     }
 
-
     public function update($id, MainCategoryRequest $request)
     {
         try {
             //validation
 
             //update DB
-
 
             $category = Category::find($id);
 
@@ -89,13 +84,9 @@ class MainCategoriesController extends Controller
 
             $request->request->add(['slug' =>Str::slug($request->slug)]);
 
-
-
             $category->update($request->all());
-
             //save translations
             $category->name = $request->name;
-
             $category->save();
 
             return redirect()->route('admin.maincategories')->with(['success' => __('admin/general.updated successfully')]);
@@ -105,7 +96,6 @@ class MainCategoriesController extends Controller
         }
 
     }
-
 
     public function destroy($id)
     {
