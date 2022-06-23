@@ -33,7 +33,6 @@ class MainCategoriesController extends Controller
 
             $category = Category::create([
                 'slug'=>$request->slug,
-                'parent_id'=>0,
                 'is_active'=>$request->is_active
             ]);
 

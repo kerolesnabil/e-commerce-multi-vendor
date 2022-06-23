@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+
 
 class SubCategoriesController extends Controller
 {
@@ -27,31 +29,23 @@ class SubCategoriesController extends Controller
 
     public function store(SubCategoryRequest $request)
     {
-
-        try {
-
-            DB::beginTransaction();
-
-            //validation
-
-            if (!$request->has('is_active'))
-                $request->request->add(['is_active' => 0]);
-            else
-                $request->request->add(['is_active' => 1]);
-
-            $category = Category::create($request->except('_token'));
-
-            //save translations
-            $category->name = $request->name;
-            $category->save();
-
-            return redirect()->route('admin.subcategories')->with(['success' => 'تم ألاضافة بنجاح']);
-            DB::commit();
-
-        } catch (\Exception $ex) {
-            DB::rollback();
-            return redirect()->route('admin.subcategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        //validation
+        if (!$request->has('is_active'))
+        {
+            $request->request->add(['is_active' => 0]);
+        } else {
+            $request->request->add(['is_active' => 1]);
         }
+
+        $request->request->add(['slug' =>Str::slug($request->slug)]);
+
+        $category = Category::create($request->except('_token'));
+
+        //save translations
+        $category->name = $request->name;
+        $category->save();
+
+        return redirect()->route('admin.subcategories')->with(['success' => __('admin/general.add successfully')]);
 
     }
 
@@ -84,24 +78,29 @@ class SubCategoriesController extends Controller
 
             $category = Category::find($id);
 
-            if (!$category)
+            if (!$category){
                 return redirect()->route('admin.subcategories')->with(['error' => 'هذا القسم غير موجود']);
-
+            }
             if (!$request->has('is_active'))
+            {
                 $request->request->add(['is_active' => 0]);
-            else
+
+            } else {
                 $request->request->add(['is_active' => 1]);
 
+            }
+
+            $request->request->add(['slug' =>Str::slug($request->slug)]);
             $category->update($request->all());
 
             //save translations
             $category->name = $request->name;
             $category->save();
 
-            return redirect()->route('admin.subcategories')->with(['success' => 'تم ألتحديث بنجاح']);
+            return redirect()->route('admin.subcategories')->with(['success' => __('admin/general.updated successfully')]);
         } catch (\Exception $ex) {
 
-            return redirect()->route('admin.subcategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+            return redirect()->route('admin.subcategories')->with(['error' => __('admin/general.error to update')]);
         }
 
     }

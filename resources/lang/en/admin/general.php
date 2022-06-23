@@ -37,5 +37,8 @@ return [
     'error to delete'=>'error to delete',
     'sub category'=>'sub categories',
     'add sub category'=>'add sub category',
+    'update sub category'=>'update sub category',
+    'select category'=>'add sub category',
+    'category name'=>'add sub category',
 
 ];

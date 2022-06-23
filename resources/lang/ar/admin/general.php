@@ -38,6 +38,9 @@ return [
     'error to delete'=>'حدثت مشكله فى الحذف',
     'sub category'=>'الاقسام الفرعية',
     'add sub category'=>' أضافة قسم فرعي جديد',
+    'update sub category'=>'تعديل قسم فرعى',
+    'select category'=>'اضافة قسم فرعى ',
+    'category name'=>'اسم القسم',
 
 
 ];

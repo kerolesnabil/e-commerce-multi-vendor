@@ -46,15 +46,33 @@ class Category extends Model
 
     public function scopeParent($query)
     {
-        return $query->where('parent_id',0);
+        return $query->whereNull('parent_id');
     }
     public function scopeChild($query)
     {
-        return $query->where('parent_id','>',0);
+        return $query->whereNotNull('parent_id');
     }
 
     public function getActive(){
         return  $this -> is_active  == 0 ?  __('admin/general.not active')  :__('admin/general.active') ;
+    }
+
+    public function _parent(){
+        return $this->belongsTo(self::class, 'parent_id');
+    }
+
+    public function scopeActive($query){
+        return $query -> where('is_active',1) ;
+    }
+
+    //get all childrens=
+    public function childrens(){
+        return $this -> hasMany(Self::class,'parent_id');
+    }
+
+    public function products()
+    {
+        return $this -> belongsToMany(Product::class,'product_categories');
     }
 
 }
