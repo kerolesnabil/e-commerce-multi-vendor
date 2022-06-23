@@ -36,6 +36,8 @@ return [
     'show'=>'عرض',
     'delete successfully'=>'تم  الحذف بنجاح ',
     'error to delete'=>'حدثت مشكله فى الحذف',
+    'sub category'=>'الاقسام الفرعية',
+    'add sub category'=>' أضافة قسم فرعي جديد',
 
 
 ];

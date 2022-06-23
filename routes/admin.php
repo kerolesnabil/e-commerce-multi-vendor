@@ -6,6 +6,7 @@ use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\MainCategoriesController;
+use App\Http\Controllers\Dashboard\SubCategoriesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +45,7 @@ Route::group(
         });
         ###################### end profile #######################
 
-        ################################## categories routes ######################################
+        ################################## MainCategoriesController routes ######################################
         Route::group(['prefix' => 'main_categories'], function () {
             Route::get('/', [MainCategoriesController::class,'index'])->name('admin.maincategories');
             Route::get('create', [MainCategoriesController::class,'create'])->name('admin.maincategories.create');
@@ -54,6 +55,19 @@ Route::group(
             Route::get('delete/{id}', [MainCategoriesController::class,'destroy'])->name('admin.maincategories.delete');
         });
         ################################## end categories    #######################################
+
+
+        ################################## SubCategoriesController routes ######################################
+        Route::group(['prefix' => 'sub_categories'], function () {
+            Route::get('/', [SubCategoriesController::class,'index'])->name('admin.subcategories');
+            Route::get('create', [SubCategoriesController::class,'create'])->name('admin.subcategories.create');
+            Route::post('store', [SubCategoriesController::class,'store'])->name('admin.subcategories.store');
+            Route::get('edit/{id}', [SubCategoriesController::class,'edit'])->name('admin.subcategories.edit');
+            Route::post('update/{id}', [SubCategoriesController::class,'update'])->name('admin.subcategories.update');
+            Route::get('delete/{id}', [SubCategoriesController::class,'destroy'])->name('admin.subcategories.delete');
+        });
+        ################################## end SubCategoriesController    #######################################
+
 
 
     });

@@ -48,6 +48,10 @@ class Category extends Model
     {
         return $query->where('parent_id',0);
     }
+    public function scopeChild($query)
+    {
+        return $query->where('parent_id','>',0);
+    }
 
     public function getActive(){
         return  $this -> is_active  == 0 ?  __('admin/general.not active')  :__('admin/general.active') ;

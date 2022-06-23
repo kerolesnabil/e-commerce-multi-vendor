@@ -35,5 +35,7 @@ return [
     'add main category' => 'add main category',
     'delete successfully'=>'delete Successfully',
     'error to delete'=>'error to delete',
+    'sub category'=>'sub categories',
+    'add sub category'=>'add sub category',
 
 ];
