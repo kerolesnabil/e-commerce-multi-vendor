@@ -73,7 +73,7 @@
                                             <div class="form-body">
 
                                                 <h4 class="form-section"><i class="ft-home"></i>{{__('admin/general.data of category')}} </h4>
-                                                <div class="row">
+                                                <div class="row" style="background:rgba(60,63,65,0.28)" >
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> {{__('admin/general.category')}} </label>

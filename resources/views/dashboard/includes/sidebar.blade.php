@@ -32,27 +32,12 @@
                     <li class="active"><a class="menu-item" href="{{route('admin.maincategories')}}"
                                           data-i18n="nav.dash.ecommerce"> {{__('admin/general.show all')}} </a>
                     </li>
-                    <li><a class="menu-item" href="{{route('admin.maincategories.create')}}" data-i18n="nav.dash.crypto">{{__('admin/general.add main category')}}</a>
+                    <li><a class="menu-item" href="{{route('admin.maincategories.create')}}" data-i18n="nav.dash.crypto">اضافه قسم جديد</a>
                     </li>
                 </ul>
             </li>
 
-            <li class="nav-item"><a href=""><i class="la la-group"></i>
-                    <span class="menu-title" data-i18n="nav.dash.main">  {{__('admin/general.sub category')}} </span>
-                    <span
-                        class="badge badge badge-danger badge-pill float-right mr-2">400</span>
-                </a>
-                <ul class="menu-content">
-                    <li class="active"><a class="menu-item" href="{{route('admin.subcategories')}}"
-                                          data-i18n="nav.dash.ecommerce"> {{__('admin/general.show all')}} </a>
-                    </li>
-                    <li>
-                        <a class="menu-item" href="{{route('admin.subcategories.create')}}" data-i18n="nav.dash.crypto">
-                            {{__('admin/general.add sub category')}}
-                        </a>
-                    </li>
-                </ul>
-            </li>
+
 
 
             <li class="nav-item"><a href=""><i class="la la-group"></i>
@@ -66,6 +51,22 @@
                     </li>
                     <li><a class="menu-item" href="{{route('admin.brands.create')}}" data-i18n="nav.dash.crypto">أضافة
                             ماركة جديده </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li class="nav-item"><a href=""><i class="la la-group"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> العلامات tags  </span>
+                    <span
+                        class="badge badge badge-danger badge-pill float-right mr-2"></span>
+                </a>
+                <ul class="menu-content">
+                    <li class="active"><a class="menu-item" href="{{route('admin.tags')}}"
+                                          data-i18n="nav.dash.ecommerce"> عرض الكل </a>
+                    </li>
+                    <li><a class="menu-item" href="{{route('admin.tags.create')}}" data-i18n="nav.dash.crypto">أضافة
+                        </a>
                     </li>
                 </ul>
             </li>
