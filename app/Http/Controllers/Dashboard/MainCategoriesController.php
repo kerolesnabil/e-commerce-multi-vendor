@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Enumerations\CategoryType;
 use App\Http\Requests\MainCategoryRequest;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
@@ -12,7 +13,7 @@ class MainCategoriesController extends Controller
 {
     public function index()
     {
-        $categories = Category::parent()->orderBy('id','asc') -> paginate(PAGINATION_COUNT);
+        $categories = Category::with('_parent')->orderBy('id','asc') -> paginate(PAGINATION_COUNT);
 
         return view('dashboard.categories.index', compact('categories'));
     }
@@ -26,15 +27,21 @@ class MainCategoriesController extends Controller
     public function store(MainCategoryRequest $request)
     {
             //validation
-            if ($request->has('is_active')) {$request->request->add(['is_active' => 1]);}
-            else{$request->request->add(['is_active' => 0]);}
+        if ($request->has('is_active')) {$request->request->add(['is_active' => 1]);}
+        else{$request->request->add(['is_active' => 0]);}
 
-            $request->request->add(['slug' =>Str::slug($request->slug)]);
+        $request->request->add(['slug' =>Str::slug($request->slug)]);
 
-            $category = Category::create([
-                'slug'=>$request->slug,
-                'is_active'=>$request->is_active
-            ]);
+
+        if($request -> type == CategoryType::mainCategory) //main category
+        {
+            $request->request->add(['parent_id' => null]);
+        }
+
+        //if he choose child category we mus t add parent id
+
+
+        $category = Category::create($request->except('_token'));
 
             //save translations
             $category->name = $request->name;

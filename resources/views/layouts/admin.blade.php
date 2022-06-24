@@ -61,7 +61,9 @@
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('dashboard.includes.sidebar')
 
+
 @yield('content')
+
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('dashboard.includes.footer')
 
@@ -69,10 +71,7 @@
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
-<script src="{{asset('assets/admin/vendors/js/tables/datatable/datatables.min.js')}}"
-        type="text/javascript"></script>
-<script src="{{asset('assets/admin/vendors/js/tables/datatable/dataTables.buttons.min.js')}}"
-        type="text/javascript"></script>
+
 
 <script src="{{asset('assets/admin/vendors/js/forms/toggle/bootstrap-switch.min.js')}}"
         type="text/javascript"></script>
