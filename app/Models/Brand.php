@@ -49,8 +49,8 @@ class Brand extends Model
         return  $this -> is_active  == 0 ?  __('admin/general.not active')  :__('admin/general.active') ;
     }
 
-    public function  getPhotoAttribute($val){
-        return ($val !== null) ? asset('assets/images/brands/' . $val) : "";
-    }
+//    public function  getPhotoAttribute($val){
+//        return ($val !== null) ? asset('assets/images/brands/' . $val) : "";
+//    }
 
 }

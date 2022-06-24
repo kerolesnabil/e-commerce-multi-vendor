@@ -9,6 +9,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class BrandsController extends Controller
@@ -94,6 +95,7 @@ class BrandsController extends Controller
                 Brand::where('id', $id)->update([
                         'photo' => $fileName,
                     ]);
+                Storage::disk('brands')->delete($brand->photo);
             }
 
             if (!$request->has('is_active'))
@@ -128,11 +130,8 @@ class BrandsController extends Controller
                 return redirect()->route('admin.brands')->with(['error' => 'هذا الماركة غير موجود ']);
             }
 
-
-
             $brand->delete();
-
-
+            Storage::disk('brands')->delete($brand->photo);
             return redirect()->route('admin.brands')->with(['success' => 'تم  الحذف بنجاح']);
 
         } catch (\Exception $ex) {
