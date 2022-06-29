@@ -9,7 +9,7 @@ use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class MainCategoriesController extends Controller
+class CategoriesController extends Controller
 {
     public function index()
     {
@@ -20,8 +20,9 @@ class MainCategoriesController extends Controller
 
     public function create()
     {
-        $categories =   Category::select('id','parent_id')->get();
-        return view('dashboard.categories.create',compact('categories'));
+        $categories = Category::select('id','parent_id')->parent()->with(['children'])->orderby('parent_id')->get() ;
+
+        return view('dashboard.categories.create')->with(['categories'=>$categories ]);
     }
 
     public function store(MainCategoryRequest $request)

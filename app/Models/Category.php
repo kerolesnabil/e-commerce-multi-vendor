@@ -65,9 +65,33 @@ class Category extends Model
         return $query -> where('is_active',1) ;
     }
 
-    //get all childrens=
-    public function childrens(){
-        return $this -> hasMany(Self::class,'parent_id');
+    public function children()
+    {
+        return $this->hasMany(Category::class, "parent_id")->with(["children"=> function($query){
+        return $query->with("children");
+        }]);
+    }
+
+    public static function tree()
+    {
+        $allCategories = Category::get();
+
+        $rootCategories = $allCategories->whereNull('parent_id');
+
+        self::formatTree($rootCategories, $allCategories);
+
+        return $rootCategories;
+    }
+
+    private static function formatTree($categories, $allCategories)
+    {
+        foreach ($categories as $category) {
+            $category->children = $allCategories->where('parent_id', $category->id)->values();
+
+            if ($category->children->isNotEmpty()) {
+                self::formatTree($category->children, $allCategories);
+            }
+        }
     }
 
     public function products()
