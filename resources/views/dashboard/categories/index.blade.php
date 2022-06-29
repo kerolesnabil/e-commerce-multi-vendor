@@ -64,7 +64,7 @@
                                                         <td>{{$category -> _parent -> name  ?? '--' }}</td>
                                                         <td>{{$category -> slug}}</td>
                                                         <td>{{ $category -> getActive()}}</td>
-                                                        <td> <img style="width: 150px; height: 100px;" src=" "></td>
+                                                        <td> <img style="width: 150px; height: 100px;" src="{{asset('assets/images/category/' . $category -> img_obj )}}"></td>
                                                         <td>
                                                             <div class="btn-group" role="group"
                                                                  aria-label="Basic example">
@@ -95,6 +95,7 @@
                         </div>
                     </div>
                 </section>
+                {!! $categories -> links() !!}
             </div>
         </div>
     </div>

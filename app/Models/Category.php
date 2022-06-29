@@ -68,16 +68,26 @@ class Category extends Model
     public function children()
     {
         return $this->hasMany(Category::class, "parent_id")->with(["children"=> function($query){
-        return $query->with("children");
+            return $query->with("children");
         }]);
     }
 
-    public static function tree()
+    public static function treeCrate()
     {
         $allCategories = Category::get();
 
         $rootCategories = $allCategories->whereNull('parent_id');
 
+        self::formatTree($rootCategories, $allCategories);
+
+        return $rootCategories;
+    }
+
+    public static function treeUpdate($id)
+    {
+        $allCategories = Category::where('id','<>',$id)->get();
+
+        $rootCategories = $allCategories->whereNull('parent_id');
         self::formatTree($rootCategories, $allCategories);
 
         return $rootCategories;
@@ -98,5 +108,6 @@ class Category extends Model
     {
         return $this -> belongsToMany(Product::class,'product_categories');
     }
+
 
 }
