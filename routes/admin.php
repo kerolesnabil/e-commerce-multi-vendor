@@ -5,8 +5,8 @@ use App\Http\Controllers\Dashboard\LoginController;
 use App\Http\Controllers\Dashboard\SettingController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\MainCategoriesController;
-use App\Http\Controllers\Dashboard\SubCategoriesController;
+use App\Http\Controllers\Dashboard\CategoriesController;
+use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Dashboard\TagsController;
 use App\Http\Controllers\Dashboard\BrandsController;
 
@@ -49,12 +49,12 @@ Route::group(
 
         ################################## MainCategoriesController routes ######################################
         Route::group(['prefix' => 'main_categories'], function () {
-            Route::get('/', [MainCategoriesController::class,'index'])->name('admin.maincategories');
-            Route::get('create', [MainCategoriesController::class,'create'])->name('admin.maincategories.create');
-            Route::post('store', [MainCategoriesController::class,'store'])->name('admin.maincategories.store');
-            Route::get('edit/{id}', [MainCategoriesController::class,'edit'])->name('admin.maincategories.edit');
-            Route::post('update/{id}', [MainCategoriesController::class,'update'])->name('admin.maincategories.update');
-            Route::get('delete/{id}', [MainCategoriesController::class,'destroy'])->name('admin.maincategories.delete');
+            Route::get('/', [CategoriesController::class,'index'])->name('admin.maincategories');
+            Route::get('create', [CategoriesController::class,'create'])->name('admin.maincategories.create');
+            Route::post('store', [CategoriesController::class,'store'])->name('admin.maincategories.store');
+            Route::get('edit/{id}', [CategoriesController::class,'edit'])->name('admin.maincategories.edit');
+            Route::post('update/{id}', [CategoriesController::class,'update'])->name('admin.maincategories.update');
+            Route::get('delete/{id}', [CategoriesController::class,'destroy'])->name('admin.maincategories.delete');
         });
         ################################## end categories    #######################################
 
@@ -80,6 +80,23 @@ Route::group(
         });
         ################################## end brands    #######################################
 
+        ################################## products routes ######################################
+        Route::group(['prefix' => 'products'], function () {
+            Route::get('/', [ProductsController::class,'index'])->name('admin.products');
+
+            Route::get('general-information', [ProductsController::class,'create'])->name('admin.products.general.create');
+            Route::post('store-general-information', [ProductsController::class,'store'])->name('admin.products.general.store');
+
+            Route::get('price/{id}', [ProductsController::class,'getPrice'])->name('admin.products.price');
+            Route::post('price', [ProductsController::class,'saveProductPrice'])->name('admin.products.price.store');
+
+            Route::get('stock/{id}', [ProductsController::class,'getStock'])->name('admin.products.stock');
+            Route::post('stock', [ProductsController::class,'saveProductStock'])->name('admin.products.stock.store');
+
+            Route::get('images/{id}', [ProductsController::class,'addImages'])->name('admin.products.images');
+            Route::post('images', [ProductsController::class,'saveProductImages'])->name('admin.products.images.store');
+            Route::post('images/db', [ProductsController::class,'saveProductImagesDB'])->name('admin.products.images.store.db');
+        });
 
     });
 

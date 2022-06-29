@@ -12,10 +12,19 @@
         return  $filename;
     }
 
-    function deleteImage($folder,$image)
-    {
+    function SortCategoryInSelect($categories,$id=false,$child=FALSE,$parent=false){
+        $str='';
+        if(count($categories)){
+            foreach ($categories as $item){
+                $str.="<option value=".$item->id.". class='text-success' >" .$item->name .(($child==true)?'-'.$parent:'') ."</option>";
+                //DO we have any children?
+                if (isset($item->children)&& count($item->children)){
+                    $str.=SortCategoryInSelect($item->children,false,true,$item->name);
+                }
+            }
+        }
 
-
+        return $str;
     }
 
 

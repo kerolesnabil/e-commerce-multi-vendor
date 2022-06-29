@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBrandsTeble extends Migration
+class CreateProductImagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class CreateBrandsTeble extends Migration
      */
     public function up()
     {
-        Schema::create('brands', function (Blueprint $table) {
-            $table->increments('id');
-            $table->boolean('is_active');
+        Schema::create('images', function (Blueprint $table) {
+            $table->id();
+            $table->integer('product_id')->unsigned();
+            $table->string('photo');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ class CreateBrandsTeble extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('brands');
+        Schema::dropIfExists('images');
     }
 }
