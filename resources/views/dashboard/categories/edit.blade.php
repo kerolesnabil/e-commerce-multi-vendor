@@ -53,7 +53,7 @@
                                             <div class="form-group">
                                                 <div class="text-center">
                                                     <img
-                                                        src=""
+                                                        src="{{asset('assets/images/category/' . $category -> img_obj )}}"
                                                         class="rounded-circle  height-150" alt="{{__('admin/general.image')}}">
                                                 </div>
                                             </div>
@@ -69,11 +69,10 @@
                                                 <span class="text-danger">{{$message}}</span>
                                                 @enderror
                                             </div>
-
                                             <div class="form-body">
 
                                                 <h4 class="form-section"><i class="ft-home"></i>{{__('admin/general.data of category')}} </h4>
-                                                <div class="row" style="background:rgba(60,63,65,0.28)" >
+                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> {{__('admin/general.category')}} </label>
@@ -102,12 +101,25 @@
                                                             @enderror
                                                         </div>
                                                     </div>
-
-
-
-
-
                                                 </div>
+
+                                                <div class="row" id="cats_list" >
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <select name="parent_id" class="select2 form-control col-12" >
+                                                                <optgroup label="من فضلك أختر القسم ">
+                                                                    <option value="0" {{($category->parent_id==0)?'selected':'' }} >parent</option>
+                                                                    {!! SortCategoryInSelect($categories,$category->parent_id) !!}
+                                                                </optgroup>
+                                                            </select>
+                                                            @error('parent_id')
+                                                            <span class="text-danger"> {{$message}}</span>
+                                                            @enderror
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group mt-1">
