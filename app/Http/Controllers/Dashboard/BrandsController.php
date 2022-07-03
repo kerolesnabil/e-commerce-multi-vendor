@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BrandRequest;
-use App\Http\Requests\MainCategoryRequest;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -124,14 +124,13 @@ class BrandsController extends Controller
     {
         try {
             //get specific categories and its translations
-            $brand = Brand::find($id);
+            $brand = Brand::findOrFail($id);
 
-            if (!$brand){
-                return redirect()->route('admin.brands')->with(['error' => 'هذا الماركة غير موجود ']);
-            }
-
+            $brand->translations->delete();
             $brand->delete();
+
             Storage::disk('brands')->delete($brand->photo);
+
             return redirect()->route('admin.brands')->with(['success' => 'تم  الحذف بنجاح']);
 
         } catch (\Exception $ex) {

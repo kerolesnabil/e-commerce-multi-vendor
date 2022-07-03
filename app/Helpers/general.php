@@ -11,6 +11,11 @@
         $filename =$image->hashName();
         return  $filename;
     }
+    function deleteImage($folder,$image)
+    {
+        \Illuminate\Support\Facades\Storage::disk($folder)->delete($image);
+
+    }
 
 
     function SortCategoryInSelect($categories,$id=null,$child=FALSE,$parent=false){
