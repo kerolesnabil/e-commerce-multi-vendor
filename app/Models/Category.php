@@ -74,7 +74,7 @@ class Category extends Model
 
     public static function treeCrate()
     {
-        $allCategories = Category::get();
+        $allCategories = Category::active()->get();
 
         $rootCategories = $allCategories->whereNull('parent_id');
 
@@ -85,7 +85,7 @@ class Category extends Model
 
     public static function treeUpdate($id)
     {
-        $allCategories = Category::where('id','<>',$id)->get();
+        $allCategories = Category::where('id','<>',$id)->active()->get();
 
         $rootCategories = $allCategories->whereNull('parent_id');
         self::formatTree($rootCategories, $allCategories);

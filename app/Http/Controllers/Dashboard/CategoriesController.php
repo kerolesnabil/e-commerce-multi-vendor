@@ -102,10 +102,8 @@ class CategoriesController extends Controller
 
         if ($request->has('photo')) {
             $fileName = uploadImage('category', $request->photo);
-            Category::where('id', $id)->update([
-                'img_obj' => $fileName,
-            ]);
             Storage::disk('category')->delete($category->photo);
+            $category->img_obj=$fileName;
         }
 
         $category->update($request->except('_token'));
