@@ -36,6 +36,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $exception)
     {
+        if($exception->getCode() == 508){
+            return redirect("/")->with("msg",$exception->getMessage())->send();
+        }
+
         parent::report($exception);
     }
 
