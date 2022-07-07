@@ -29,6 +29,20 @@
 
     }
 
+    function SortCategoryInFront($categories,$id=null,$child=FALSE,$parent=false)
+    {
+
+        return \Illuminate\Support\Facades\View::make('front.sort_category_in_front_html')->with([
+            "categories" => $categories,
+            "id" => $id,
+            "child" => $child,
+            "parent" => $parent,
+        ])->render();
+
+
+
+    }
+
 
 
 

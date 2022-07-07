@@ -140,7 +140,7 @@
     var previousCounter = $('.notification-counter').text(); //8
     var notificationsCount = parseInt(previousCounter);
     // Enable pusher logging - don't include this in production
-    var pusher = new Pusher('2203df2757e00ac59e6d', {
+    var pusher = new Pusher('a603972e744ee841ead1', {
         encrypted: true
     });
     //Pusher.logToConsole = true;

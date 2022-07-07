@@ -11,6 +11,8 @@ use App\Http\Controllers\Dashboard\TagsController;
 use App\Http\Controllers\Dashboard\AttributesController;
 use App\Http\Controllers\Dashboard\BrandsController;
 use App\Http\Controllers\Dashboard\OptionsController;
+use App\Http\Controllers\Dashboard\SliderController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -38,8 +40,8 @@ Route::group(
         Route::get('logout',[LoginController::class,'logout'])->name('admin.logout');
 
         Route::group(['prefix'=>'setting'],function (){
-            Route::get('shipping-methods/{type}',[SettingController::class,'editShippingMethods'])->name('edit.shipping.methods');
-            Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shipping.methods');
+            Route::get('shipping-methods/{type}',[SettingController::class,'editShippingMethods'])->name('edit.shippings.methods');
+            Route::put('shipping-methods/{id}',[SettingController::class,'updateShippingMethods'])->name('update.shippings.methods');
         });
 
         ####################### profile routes #######################
@@ -123,7 +125,14 @@ Route::group(
         });
         ################################## end options    #######################################
 
+        ################################## sliders ######################################
+        Route::group(['prefix' => 'sliders'], function () {
+            Route::get('/', [SliderController::class,'addImages'])->name('admin.sliders.create');
+            Route::post('images',[SliderController::class,'saveSliderImages'])->name('admin.sliders.images.store');
+            Route::post('images/db', [SliderController::class,'saveSliderImagesDB'])->name('admin.sliders.images.store.db');
 
+        });
+        ################################## end sliders    #######################################
 
     });
 
